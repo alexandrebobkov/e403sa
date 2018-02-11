@@ -8,12 +8,13 @@
 ;=====================================================
 
 [colors]
+#transparent = #f90000
 transparent = #112233
 #transparent = #0F0F0F0F
 #transparent = #61EFF0F1
 #transparent = #603F1111
 ;background = ${xrdb:color0:#222}
-#background = #222
+background = #FFEEBB
 #background = #61EFF0
 #background-alt = #444
 ;foreground = ${xrdb:color7:#222}
@@ -26,7 +27,8 @@ alert	=	#bd2c40
 red	=	#f90000
 blue	=	#0063ff
 green	=	#55aa55
-yellow	=	#ffb52a
+yellow	=	#FFAA11
+# yellow =	#ffb52a
 
 [bar/top]
 width = 100%
@@ -40,7 +42,7 @@ modules-right =
 module-margin-left = 3
 module-margin-right= 0
 
-border-size = 4
+border-size = 0
 
 padding-left = 0
 padding-right = 0
@@ -62,26 +64,54 @@ font-2 = siji:pixelsize=10;1
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+[bar/minimal]
+bottom = true
+fixed-center = true
+height = 25
+radius = 10
+modules-center = i3
+border-size = 830
+border-top-size = 0
+border-bottom-size = 5
+
+padding-left = 0
+padding-right = 3
+
+tray-position = 
+tray-padding = 0
+tray-transparent = true
+
+background = ${colors.transparent}
+foreground = ${colors.foreground}
+line-size = 3
+line-color = #F00
+font-0 = fontawesome:size=10:dpi=150;1
+font-1 = Jura:dpi=91;1
+font-2 = siji:pixelsize=10;1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 [bar/e403sa]
 ;monitor = ${env:MONITOR:HDMI-1}
 bottom = true
 ;tray = right
 width = 100%
 height = 25
-radius = 3.0
+radius = 10.0
 fixed-center = true
 separator = |
 
 ; app_terminal app_chrome app_calendar
 modules-left = i3
 ;modules-center =
-modules-right =  app_cra app_gdocs app_audio volume updates memory freespace cpu xbacklight  battery wlan  kernel date xkeyboard2 app_timer powermenu
+; app_cra
+modules-right =  app_gdocs app_audio volume updates memory freespace cpu xbacklight  battery wlan  kernel date xkeyboard2 app_timer powermenu
 module-margin-left = 2
 module-margin-right = 2
 
-border-size = 5
-border-top-size = 5
-border-bottom-size = 0
+border-size = 250
+border-top-size = 0
+border-bottom-size = 5
 
 padding-left = 0
 padding-right = 3
@@ -93,7 +123,7 @@ tray-transparent = true
 ;background = ${colors.background}
 background = ${colors.transparent}
 foreground = ${colors.foreground}
-line-size = 2
+line-size = 3
 line-color = #F00
 ;font-0 = fixed:pixelsize=10;1
 font-0 = fontawesome:size=10:dpi=150;1
@@ -204,20 +234,20 @@ label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
 [module/i3]
-type = internal/i3
-format = <label-state> <label-mode>
-strip-wsnumbers = true
-fuzzy-match	= true
-pin-workspaces = true
-index-sort = true
-wrapping-scroll = false
+type			=	internal/i3
+format			=	<label-state> <label-mode>
+strip-wsnumbers	=	true
+fuzzy-match		=	true
+pin-workspaces	=	true
+index-sort		=	true
+wrapping-scroll	=	false
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
 
-label-mode-padding = 3
-label-mode-foreground = #112233
-label-mode-background =#556644
+label-mode-padding		= 3
+label-mode-foreground	= ${colors.transparent}
+label-mode-background	=#556644
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
@@ -236,13 +266,14 @@ label-unfocused-padding = 2
 ;label-visible = %index%
 label-visible = %icon%
 label-visible-background = #556644
-label-visible-underline = #FFAA11
+#label-visible-underline = #FFAA11
+label-visible-underline = ${colors.yellow}
 label-visible-padding = ${self.label-focused-padding}
 label-visible-font = 1
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %icon%
-label-urgent-background = #FFAA11
+label-urgent-background = ${colors.yellow}
 label-urgent-padding = 2
 
 ; 1 &#xf0ce;1 
@@ -452,7 +483,8 @@ adapter = AC
 full-at = 90
 
 format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+#format-charging-underline = #ffb52a
+format-charging-underline = ${colors.yellow}
 ;label-charging = %consumption% W %percentage%%
 label-charging = %percentage%%
 
@@ -552,7 +584,8 @@ exec = "pacman -Qqu | wc -l"
 tail = true
 interval = 90
 format-prefix = 
-format-underline = #764514
+#format-underline = #764514
+format-underline = ${colors.yellow}
 label = %{A:exo-open --launch TerminalEmulator:} %output% %{A}
 ; -e "pacman -Qu"
 ;format-background = #268bd2
